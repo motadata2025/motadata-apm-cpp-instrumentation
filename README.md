@@ -1,17 +1,10 @@
 # Motadata C++ Instrumentation
 
-![Motadata Premium](https://img.shields.io/badge/Motadata-Instrumentation-blue?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
-![C++](https://img.shields.io/badge/C++-14-orange?style=for-the-badge)
+![C++](https://img.shields.io/badge/C++->=14-orange?style=for-the-badge)
 
-A powerful, high-performance C++ wrapper around Motadata Instrumentation for seamless application monitoring and tracing. This package simplifies the integration of observability into C++ applications, providing a clean API to capture spans, attributes, and more.
+C++ wrapper around Motadata Instrumentation for application monitoring and tracing. This package simplifies the integration of observability into C++ applications, providing a clean API to capture spans, attributes, and more.
 
-## High-Level Features
-
-- **Simplified API**: Avoid the boilerplate of raw instrumentation.
-- **Premium Performance**: Minimal overhead instrumentation designed for scale.
-- **Easy Integration**: Build as a static library and link into any C++ project.
-- **Standard Compliant**: Supports OTLP/HTTP export and standard instrumentation resources.
 
 ## Prerequisites
 
@@ -22,6 +15,8 @@ Before building, ensure you have the following dependencies installed:
 - **Instrumentation C++ SDK** (Configured with OTLP HTTP support)
 - **libcurl**
 - **pthread**
+- **Make**
+- **git**
 
 ## Quick Start
 
@@ -40,12 +35,12 @@ This will generate `libmotadata.a` in your build directory.
 The most efficient way to integrate this library is as a Git submodule:
 
 ```bash
-git submodule add https://github.com/motadata2025/motadata-apm-cpp-instrumentation motadata
+git submodule add https://github.com/motadata2025/motadata-apm-cpp-instrumentation motadata-cpp
 ```
 
 ### Linking to Your Project
 
-1. Add `add_subdirectory(motadata)` to your `CMakeLists.txt`.
+1. Add `add_subdirectory(motadata-cpp)` to your `CMakeLists.txt`.
 2. Link your target against `motadata`, `curl`, and `pthread`.
 
 ### Basic Usage
@@ -92,7 +87,3 @@ For detailed API documentation, please refer to the header file `include/motadat
 ## License
 
 Distributed under the [LICENSE](LICENSE) provided in this repository.
-
----
-
-Designed with ❤️ for high-performance observability.
