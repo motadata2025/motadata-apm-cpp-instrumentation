@@ -300,6 +300,11 @@ SpanHandle& SpanHandle::setAttr(const std::string& key, const std::string& value
     return *this;
 }
 
+SpanHandle& SpanHandle::setAttr(const std::string& key, const char* value) {
+    if (impl_ && !ended_ && value) impl_->otel_span->SetAttribute(key, std::string(value));
+    return *this;
+}
+
 SpanHandle& SpanHandle::setAttr(const std::string& key, int64_t value) {
     if (impl_ && !ended_) impl_->otel_span->SetAttribute(key, value);
     return *this;
@@ -349,13 +354,18 @@ SpanHandle& SpanHandle::recordException(const std::exception& e) {
     if (impl_ && !ended_) {
         std::vector<std::string> keys;
         keys.reserve(2);
+        std::vector<std::string> values;
+        values.reserve(2);
         std::vector<std::pair<nostd::string_view, common::AttributeValue>> kv;
         kv.reserve(2);
 
         keys.push_back("exception.type");
-        kv.emplace_back(keys.back(), std::string("std::exception"));
+        values.push_back("std::exception");
+        kv.emplace_back(keys.back(), values.back());
+
         keys.push_back("exception.message");
-        kv.emplace_back(keys.back(), std::string(e.what()));
+        values.push_back(e.what());
+        kv.emplace_back(keys.back(), values.back());
 
         impl_->otel_span->AddEvent(
             "exception",

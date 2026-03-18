@@ -56,6 +56,7 @@ public:
      * @return Reference to self for chaining.
      */
     SpanHandle& setAttr(const std::string& key, const std::string& value);
+    SpanHandle& setAttr(const std::string& key, const char* value);
     SpanHandle& setAttr(const std::string& key, int64_t value);
     SpanHandle& setAttr(const std::string& key, double value);
     SpanHandle& setAttr(const std::string& key, bool value);
