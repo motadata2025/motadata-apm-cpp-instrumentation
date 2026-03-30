@@ -188,6 +188,10 @@ bool initTelemetry(const TelemetryConfig& cfg) {
         if (!cfg.service_namespace.empty()) {
             res_attrs["service.namespace"] = cfg.service_namespace;
         }
+        // Merge any user-supplied resource attributes (appear on ALL spans)
+        for (const auto& kv : cfg.custom_resource_attrs) {
+            res_attrs[kv.first] = kv.second;
+        }
         auto resource = res_sdk::Resource::Create(res_attrs);
 
         // Step 6: Create and Register Tracer Provider

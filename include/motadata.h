@@ -28,6 +28,8 @@
 #include <string>
 #include <memory>
 #include <map>
+#include <vector>
+#include <utility>
 
 namespace motadata {
 
@@ -161,6 +163,22 @@ struct TelemetryConfig {
 
     /// If true, span information is also printed to the standard output.
     bool debug_print_to_console   = false;
+
+    /**
+     * @brief Additional resource attributes applied to every span.
+     *
+     * These are stamped on the Resource (not individual spans), so they appear on ALL traces
+     *
+     * Example:
+     * @code
+     *   cfg.custom_resource_attrs = {
+     *       {"deployment.environment", "production"},
+     *       {"host.name",              "web-01"},
+     *       {"apm.team",               "backend"},
+     *   };
+     * @endcode
+     */
+    std::vector<std::pair<std::string, std::string>> custom_resource_attrs;
 };
 
 /**
